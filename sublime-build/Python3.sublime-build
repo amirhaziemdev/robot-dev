@@ -1,0 +1,7 @@
+{
+	"cmd": ["start", "cmd", "/k", "python", "-u", "$file"],
+    "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+    "selector": "source.python",
+	"shell": true,
+	"working_dir": "$file_dir"
+}
