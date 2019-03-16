@@ -14,9 +14,9 @@ class Robot():
         self.buffer = buffer_size
         self.connect()
         self.delay = 10
+        
         while True:
             self.routine()
-            sleep(1)
     
     def routine(self):
         self.move_backwards()
