@@ -7,7 +7,7 @@ import pickle
 import zlib
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect(('192.168.1.17', 8485))
+client_socket.connect(('192.168.1.41', 8485))
 connection = client_socket.makefile('wb')
 
 cam = cv2.VideoCapture(0)
