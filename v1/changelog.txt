@@ -5,3 +5,7 @@ v0.1.0-25032019
 -added dependencies RPi.GPIO, selectors, socket and time
 -added DCMDirect class for robot main.py
 -tested DCMDirect class functions
+
+v0.2.0-25032019
+-added placeholder class for tcp on robot and server
+-added placeholder RobotMaster class on server
