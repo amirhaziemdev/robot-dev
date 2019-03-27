@@ -9,3 +9,21 @@ v0.1.0-25032019
 v0.2.0-25032019
 -added placeholder class for tcp on robot and server
 -added placeholder RobotMaster class on server
+
+v0.2.0-26032019
+-make DCMDirect inheritable
+-added change_pin and change_pin_ref function to DCMDirect
+-created a simple TCPHandler for robot
+
+v0.2.1-26032019
+-adding limitations to change_pin to accomodate only raspberry pi 40 GPIO pins
+
+v.0.3.0-26032019
+-updating code comments
+-added dependencies types and os
+-created EasyLog class to easily write logs and document what is happening with codes
+
+v0.4.0-27032018
+-DCMDirect --> DCMControl
+-move DCMControl and EasyLog to another file for modularity
+-added dependencies dcmcontrol and easylog
