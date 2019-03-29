@@ -28,6 +28,7 @@ def service_connection(key, mask):
     sock = key.fileobj
     data = key.data
     if mask & selectors.EVENT_READ:
+        print("Read", mask)
         recv_data = sock.recv(1024)  # Should be ready to read
         if recv_data:
             print('received', repr(recv_data), 'from connection', data.connid)
@@ -37,6 +38,7 @@ def service_connection(key, mask):
             sel.unregister(sock)
             sock.close()
     if mask & selectors.EVENT_WRITE:
+        print("Write", mask)
         if not data.outb and data.messages:
             data.outb = data.messages.pop(0)
         if data.outb:

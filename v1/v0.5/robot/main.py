@@ -1,5 +1,5 @@
 """
-Robot-Dev Code Version 0.4.0-27032019
+Robot-Dev Code Version 0.5.1-29032019
 This code is design to be used with Raspberry Pi Zero W
 
 *This code is to function as a slave following one master (server)
@@ -59,14 +59,15 @@ class TCPHandler(): # TCP handler for incoming connection
         self.sel.register(self.sock, selectors.EVENT_READ, data=None)
     
     def get_self_IP(self):
+        self.sock2 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         try:
-            self.sock.connect(("8.8.8.8", 80))
-            IP = self.sock.getsockname()[0]
+            self.sock2.connect(("8.8.8.8", 80))
+            IP = self.sock2.getsockname()[0]
         except:
             IP = "127.0.0.1"
         finally:
             print("Self IP set to", IP)
-            self.sock.close()
+            self.sock2.close()
         return IP
     
     def check_conn(self):
@@ -94,9 +95,6 @@ class TCPHandler(): # TCP handler for incoming connection
         data = types.SimpleNamespace(connid=self.id_cntr,
                                      addr=addr,
                                      type="out",
-                                     msg_total=sum(len(m) for m in messages),
-                                     recv_total=0,
-                                     messages=list(messages),
                                      outb=b'')
         sel.register(sock, events, data=data)
     
@@ -107,7 +105,6 @@ class TCPHandler(): # TCP handler for incoming connection
         data = types.SimpleNamespace(connid=self.id_cntr,
                                      addr=addr,
                                      key=self.ikey,
-                                     inb=b"",
                                      outb=b"")
         events = selectors.EVENT_READ | selectors.EVENT_WRITE
         self.sel.register(conn, events, data=data)
