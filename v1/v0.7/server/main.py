@@ -1,4 +1,5 @@
 """
+main_server.py
 Robot-Dev Code Version 0.7.0-01042019
 This code is design to be used with a windows computer
 
@@ -20,8 +21,9 @@ def proc_reply(data):
     try:
         frame=pickle.loads(data, fix_imports=True, encoding="bytes")
         frame = cv2.imdecode(frame, cv2.IMREAD_COLOR)
+        cv2.namedWindow('ImageWindow')
         cv2.imshow('ImageWindow',frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(0) & 0xFF == ord('q'):
             pass
     except:
         pass
@@ -52,7 +54,7 @@ def process_data(data):
 
 if __name__ == "__main__":
     conn = TCPHandler(port=5001)
-    conn.connect("192.168.1.17", 5000, 1, "Handshake")
+    conn.connect("192.168.1.226", 5000, 1, "Handshake")
     while True:
         ret = conn.check_conn()
         if not ret:
