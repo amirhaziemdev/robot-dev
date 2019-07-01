@@ -13,23 +13,27 @@ import pickle
 from easylog import EasyLog
 from tcphandler import TCPHandler
 
+
+key = cv2.waitKey(0) & 0xFF
+
 class RobotMaster():
     pass
 
 def proc_reply(data):
-    print(data)
+    cv2.namedWindow('ImageWindow')
+    # print(data)
     try:
         frame=pickle.loads(data, fix_imports=True, encoding="bytes")
         frame = cv2.imdecode(frame, cv2.IMREAD_COLOR)
-        cv2.namedWindow('ImageWindow')
         cv2.imshow('ImageWindow',frame)
-        if cv2.waitKey(0) & 0xFF == ord('q'):
+        if key == ord('q'):
             pass
     except:
+        print("Error: frame not shown")
         pass
 
 def process_data(data):
-    print(data.key)
+    # print(data.key)
     if data.key == 1:
         data.key = 2
         data.data = "Connection established!"
@@ -54,11 +58,12 @@ def process_data(data):
 
 if __name__ == "__main__":
     conn = TCPHandler(port=5001)
-    conn.connect("192.168.1.226", 5000, 1, "Handshake")
+    conn.connect("192.168.1.227", 5000, 1, "Handshake")
     while True:
         ret = conn.check_conn()
         if not ret:
             buffer = conn.get_buffer_data()
+            print(buffer)
             if buffer:
                 for each in buffer:
                     data = each[0]
