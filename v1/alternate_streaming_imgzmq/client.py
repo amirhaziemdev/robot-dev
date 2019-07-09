@@ -3,7 +3,7 @@
 
 # import the necessary packages
 from imutils.video import VideoStream
-import imagezmq
+import imagezmq.imagezmq as imagezmq
 import argparse
 import socket
 import time
@@ -22,8 +22,11 @@ sender = imagezmq.ImageSender(connect_to="tcp://{}:5555".format(
 # get the host name, initialize the video stream, and allow the
 # camera sensor to warmup
 rpiName = socket.gethostname()
-vs = VideoStream(usePiCamera=True).start()
-#vs = VideoStream(src=0).start()
+# vs = VideoStream(usePiCamera=True).start()
+try:
+	vs = VideoStream(src=0).start()
+except:
+	vs = VideoStream(src=1).start()
 time.sleep(2.0)
  
 while True:

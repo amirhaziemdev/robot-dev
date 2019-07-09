@@ -5,7 +5,7 @@
 from imutils import build_montages
 from datetime import datetime
 import numpy as np
-import imagezmq
+import imagezmq.imagezmq as imagezmq
 import argparse
 import imutils
 import cv2
